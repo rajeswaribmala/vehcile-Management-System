@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rating</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="form-container">
+<h2>Rate Your Service</h2>
+
+<form method="POST">
+
+Rating (1-5):
+<input type="number" name="rating" min="1" max="5" required>
+
+Feedback:
+<textarea name="feedback"></textarea>
+
+<button type="submit">Submit</button>
+
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    
+    <div class="sidebar">
+        <h2 class="logo">
+            <i class="fa-solid fa-car"></i> User Panel
+        </h2>
+
+        <ul>
+            <li><a href="/dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+            <li><a href="/user/add_vehicle"><i class="fa-solid fa-plus"></i> Add Vehicle</a></li>
+            <li><a href="/user/book_service"><i class="fa-solid fa-wrench"></i> Book Service</a></li>
+            <li><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </div>
+
+   
+    <div class="main-content">
+
+        <h1>Service History</h1>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Services</th>
+                    <th>Status</th>
+                    <th>Track</th>
+                    <th>Total Amount</th>
+                    <th>Additional Repair</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for s in requests %}
+            <tr>
+
+                <td>{{ s["id"] }}</td>
+
+                <td>
+                    {% for service in s["services"] %}
+                        {{ service["name"] }}<br>
+                    {% endfor %}
+                </td>
+
+                <td>
+                    {% if s["status"] == "Assigned" %}
+                        <span class="badge badge-info">Assigned</span>
+                    {% elif s["status"] == "In Progress" %}
+                        <span class="badge badge-warning">In Progress</span>
+                    {% elif s["status"] == "Completed" %}
+                        <span class="badge badge-success">Completed</span>
+                    {% else %}
+                        {{ s["status"] }}
+                    {% endif %}
+                </td>
+<td>
+       <a href="{{ url_for('track_service', id=s['id']) }}" class="btn-secondary">
+    Track
+</a>
+    </td>
+                <td>₹{{ s["cost"] }}</td>
+
+                
+                <td>
+{% if s["additional_status"] == "Requested" %}
+<span class="badge badge-warning">
+{{ s["additional_repair"] }} (₹{{ s["additional_cost"] }})
+</span>
+
+{% elif s["additional_status"] == "Approved" %}
+<span class="badge badge-success">
+{{ s["additional_repair"] }} Approved (₹{{ s["additional_cost"] }})
+</span>
+
+{% elif s["additional_status"] == "Rejected" %}
+<span class="badge badge-danger">
+Rejected
+</span>
+
+{% else %}
+-
+{% endif %}
+</td>
+                
+                <td>
+
+                    {% if s["additional_status"] == "Requested" %}
+                        <a href="/confirm_additional/{{ s['id'] }}" class="btn-warning">
+                            Confirm
+                        </a>
+                        <a href="/reject_additional/{{ s['id'] }}" class="btn-danger">
+                            Reject
+                        </a>
+
+                    {% elif s["status"] == "Completed" and s["payment_status"] != "Paid" %}
+                        <a href="/user/payment/{{ s['id'] }}" class="btn-primary">
+                            Pay Now
+                        </a>
+
+                    {% elif s["payment_status"] == "Paid" %}
+                        <span class="paid-text">Paid</span>
+
+                    {% else %}
+                        —
+                    {% endif %}
+
+                </td>
+
+            </tr>
+            {% endfor %}
+
+            {% if not requests %}
+            <tr>
+                <td colspan="6" style="text-align:center;">No service history found.</td>
+            </tr>
+            {% endif %}
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

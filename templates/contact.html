@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact - AutoCare</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+
+    background-image:url("/static/images/contact.webp");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+
+
+header{
+    background:#0d6efd;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+
+
+.contact-box{
+    max-width:500px;
+    margin:70px auto;
+    padding:40px;
+    border-radius:12px;
+
+    /* GLASS EFFECT */
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 8px 32px rgba(0,0,0,0.25);
+
+    color:black;
+}
+
+.contact-box h2{
+    margin-bottom:20px;
+}
+
+
+
+input, textarea{
+    width:100%;
+    padding:10px;
+    margin-bottom:12px;
+    border-radius:6px;
+    border:none;
+
+    background:rgba(255,255,255,0.25);
+    color:black;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:black;
+}
+
+
+
+button{
+    background:#0d6efd;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#084298;
+}
+
+hr{
+    margin:30px 0;
+    border-color:rgba(255,255,255,0.4);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h2>AutoCare Vehicle Service Center</h2>
+
+<nav>
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/login">Login</a>
+</nav>
+
+</header>
+
+
+<div class="contact-box">
+
+<h2>Get in Touch</h2>
+
+<form method="POST">
+
+<input type="text" name="name" placeholder="Your Name" required>
+
+<input type="email" name="email" placeholder="Your Email" required>
+
+<textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
+
+<hr>
+
+<h3>Contact Details</h3>
+
+<p>📞 +91 98765 43210</p>
+<p>📍 24, Anna Salai, Chennai</p>
+
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<script>
+alert("{{ messages[0] }}");
+</script>
+{% endif %}
+{% endwith %}
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<a href="/admin/dashboard" class="back-link">← Back to Dashboard</a>
+
+<h2 class="admin-title">Service History</h2>
+
+<table class="admin-table">
+
+<tr>
+<th>ID</th>
+<th>User</th>
+<th>Mechanic</th>
+<th>Service</th>
+<th>Additional Repair</th>
+<th>Service Cost</th>
+<th>Repair Cost</th>
+<th>Total Cost</th>
+<th>Date</th>
+<th>Status</th>
+</tr>
+
+{% for s in services %}
+<tr>
+<td>{{ s["id"] }}</td>
+<td>{{ s["user_name"] }}</td>
+<td>{{ s["mechanic_name"] }}</td>
+<td>{{ s["service_name"] }}</td>
+<td>{{ s["repair"] }}</td>
+<td>₹{{ s["service_cost"] }}</td>
+<td>₹{{ s["repair_cost"] }}</td>
+<td><b>₹{{ s["total_cost"] }}</b></td>
+<td>{{ s["completed_at"] }}</td>
+<td>{{ s["status"] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

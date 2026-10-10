@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Categories</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>Additional Repairs</h2>
+
+<p><strong>Repair Details:</strong></p>
+<p>{{ data[0] }}</p>
+
+<p><strong>Additional Cost:</strong> ₹ {{ data[1] }}</p>
+
+<form method="POST">
+    <button type="submit" name="action" value="confirm">
+        Confirm
+    </button>
+
+    <button type="submit" name="action" value="reject">
+        Reject
+    </button>
+</form>
+</body>
+</html>

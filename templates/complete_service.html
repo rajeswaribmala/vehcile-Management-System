@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Categories</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<h2>Complete Service</h2>
+
+<form method="POST">
+    <input type="hidden" name="id" value="{{ id }}">
+
+    <input type="number" name="service_cost" placeholder="Service Cost" required>
+
+    <button type="submit">Complete Service</button>
+</form>
+</body>
+</html>

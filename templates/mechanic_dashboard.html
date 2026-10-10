@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mechanic Dashboard</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    background: #2c3e50;
+    color: white;
+    padding: 25px;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.sidebar a:hover {
+    background: #34495e;
+    transform: translateX(5px);
+}
+
+.sidebar i {
+    margin-right: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background: #f4f6f9;
+}
+
+h1 {
+    margin-bottom: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th {
+    background: #34495e;
+    color: white;
+    padding: 14px;
+    text-align: center;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.btn {
+    padding: 6px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.start {
+    background: orange;
+}
+
+.complete {
+    background: green;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <h2><i class="fas fa-car"></i> Mechanic Panel</h2>
+
+    <a href="{{ url_for('mechanic_dashboard') }}">
+        <i class="fas fa-chart-line"></i> Dashboard
+    </a>
+
+    <a href="{{ url_for('mechanic_additional_list') }}">
+        <i class="fas fa-screwdriver-wrench"></i> Additional Repairs
+    </a>
+
+    <a href="/mechanic/points">
+        ⭐ Points
+    </a>
+
+    <a href="{{ url_for('logout') }}">
+        <i class="fas fa-right-from-bracket"></i> Logout
+    </a>
+</div>
+
+  
+    <div class="main-content">
+        <h1>Service Requests</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Service</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+{% for r in requests %}
+<tr>
+    <td>{{ r.id }}</td>
+    <td>{{ r.customer }}</td>
+    <td>{{ r.services }}</td>
+    <td>₹{{ r.total }}</td>
+    <td>{{ r.status }}</td>
+
+    <td>
+        {% if r.status == 'Assigned' %}
+            <a class="btn start"
+               href="{{ url_for('mechanic_update', request_id=r.id, status='In Progress') }}">
+               Start
+            </a>
+
+        {% elif r.status == 'In Progress' %}
+            <a class="btn complete"
+               href="{{ url_for('mechanic_update', request_id=r.id, status='Completed') }}">
+               Complete
+            </a>
+
+        {% elif r.status == 'Completed' %}
+            ✅ Done
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Reports</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<a href="/admin/dashboard" class="back-link">← Back to Dashboard</a>
+
+<h2 class="admin-title">System Reports</h2>
+
+
+
+<table class="admin-table">
+
+<tr>
+<th>Report Type</th>
+<th>Value</th>
+</tr>
+
+<tr>
+<td>Total Users</td>
+<td>{{ total_users }}</td>
+</tr>
+
+<tr>
+<td>Total Mechanics</td>
+<td>{{ total_mechanics }}</td>
+</tr>
+
+<tr>
+<td>Total Services</td>
+<td>{{ total_services }}</td>
+</tr>
+
+</table>
+
+<br><br>
+
+
+<h3>Branch Wise Revenue ({{ current_month }})</h3>
+
+<table class="admin-table">
+
+<tr>
+<th>Branch</th>
+<th>Amount (₹)</th>
+</tr>
+
+{% for b in branch_revenue %}
+<tr>
+<td>{{ b['branch_name'] }}</td>
+<td>₹ {{ b['branch_total'] }}</td>
+</tr>
+{% endfor %}
+
+<tr style="font-weight:bold;background:#f2f2f2;">
+<td>Total Revenue</td>
+<td>₹ {{ total_revenue }}</td>
+</tr>
+
+</table>
+
+<br><br>
+
+
+
+<h3>Monthly Revenue History</h3>
+
+<table class="admin-table">
+
+<tr>
+<th>Month</th>
+<th>Amount (₹)</th>
+</tr>
+
+{% for m in monthly_revenue %}
+<tr>
+<td>{{ m['month'] }}</td>
+<td>₹ {{ m['monthly_total'] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Additional Repair</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="form-container">
+<h2>Additional Repair Details</h2>
+
+<p><strong>Description:</strong> {{ data[0] }}</p>
+<p><strong>Extra Cost:</strong> ₹ {{ data[1] }}</p>
+
+<form method="POST">
+<button name="action" value="confirm">Confirm</button>
+<button name="action" value="reject">Reject</button>
+</form>
+
+</div>
+</body>
+</html>

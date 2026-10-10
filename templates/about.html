@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About - AutoCare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background:url("{{ url_for('static', filename='images/about1.webp') }}") center center/cover;
+            background-attachment:fixed;
+        }
+
+     
+        header {
+            background: #0d6efd;
+            padding: 15px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+     
+        .about-section {
+            padding: 80px 10%;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .about-subtitle {
+            color: #0d6efd;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .about-title {
+            font-size: 42px;
+            margin: 10px 0 20px;
+        }
+
+        .about-title span {
+            color: #0d6efd;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: black;
+        }
+
+        .about-image img {
+            width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        
+        @media (max-width: 900px) {
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">AutoCare Vehicle Service Center</div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/login">Login</a>
+    </nav>
+</header>
+
+<section class="about-section">
+    <div class="about-container">
+
+        <div class="about-content">
+            <h4 class="about-subtitle">A REPUTATION IN THE MAKING</h4>
+            <h1 class="about-title">
+                WE LOVE OUR <span>CUSTOMERS</span>
+            </h1>
+
+            <p>
+                Our company is a leading multi-brand car service center providing 
+                reliable, high-quality repair and maintenance services. Since our 
+                foundation, we have built strong and lasting relationships with 
+                our valued customers.
+            </p>
+
+            <p>
+                With experienced technicians and modern equipment, we ensure 
+                professional service under one roof. Our commitment is to deliver 
+                excellence, safety, and satisfaction in every service we provide.
+            </p>
+        </div>
+
+        
+        <div class="about-image">
+            <img src="{{ url_for('static', filename='images/about.webp') }}" alt="Company Image">
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>

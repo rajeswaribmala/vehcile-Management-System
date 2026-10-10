@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+
+<div class="admin-container">
+
+    <a href="/admin/dashboard" class="back-link">← Back to Dashboard</a>
+    <h2 class="admin-title">Manage Users</h2>
+
+   <table class="admin-table">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for u in users %}
+    <tr>
+        <td>{{ u["id"] }}</td>
+        <td>{{ u["username"] }}</td>
+        <td>{{ u["role"] }}</td>
+        <td>{{ u["status"] }}</td>
+        <td>
+            <a href="/admin/user/block/{{ u['id'] }}" class="btn-warning">
+                {% if u["status"] == "active" %}
+                    Block
+                {% else %}
+                    Unblock
+                {% endif %}
+            </a>
+
+            <a href="/admin/user/delete/{{ u['id'] }}" 
+               class="btn-danger"
+               onclick="return confirm('Are you sure you want to delete this user?');">
+                Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</div>
+
+</body>
+</html>

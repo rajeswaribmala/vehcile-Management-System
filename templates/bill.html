@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            border: 1px solid #eee;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .top-section {
+            margin-bottom: 30px;
+        }
+
+        .details, .amount-section {
+            margin-top: 20px;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #1a252f;
+        }
+    
+.button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    margin: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-download {
+    background-color: #2c3e50;
+    color: #ffffff;
+}
+
+.btn-download:hover {
+    background-color: #1a252f;
+    transform: translateY(-2px);
+}
+
+
+.btn-feedback {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+.btn-feedback:hover {
+    background-color: #22313f;
+    transform: translateY(-2px);
+}
+
+
+.btn:active {
+    transform: scale(0.95);
+}
+    </style>
+</head>
+<body>
+
+<div class="invoice-box">
+
+    <h1>AutoCare Vehicle Service Center</h1>
+
+    <div class="top-section">
+        <p><strong>Address:</strong> 24, Anna Salai, T Nagar, Chennai - 600017</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Email:</strong> support@autocare.com</p>
+    </div>
+
+    <hr>
+
+    <div class="details">
+        <p><strong>Invoice No:</strong> INV{{ service.id }}</p>
+        <p><strong>Date & Time:</strong> {{ current_datetime }}</p>
+        <p><strong>Customer Name:</strong> {{ user_name }}</p>
+        <p><strong>Vehicle Number:</strong> {{ vehicle_number }}</p>
+        <p><strong>Mechanic Name:</strong> {{ mechanic_name }}</p>
+    </div>
+
+    <hr>
+
+    <div class="amount-section">
+        <p><strong>Service Type:</strong> {{ service_name }}</p>
+        <p><strong>Service Amount:</strong> ₹ {{ service_cost }}</p>
+
+        {% if additional_cost > 0 %}
+<p><strong>Additional Repair Work:</strong> {{ additional_repair }}</p>
+<p><strong>Additional Repair Cost:</strong> ₹ {{ additional_cost }}</p>
+{% endif %}
+
+        <hr>
+
+        <p class="total">Total Paid: ₹ {{ total_amount }}</p>
+    </div>
+
+    <br><br>
+    <br><br>
+<div class="button-container">
+    <a href="{{ url_for('download_bill', service_id=service.id) }}" class="btn btn-download">
+        Download PDF Invoice
+    </a>
+
+    <a href="{{ url_for('feedback', service_id=service.id) }}" class="btn btn-feedback">
+        Give Feedback
+    </a>
+</div>
+
+    <div class="footer">
+        Thank you for choosing AutoCare. Drive Safe! 🚗
+    </div>
+
+</div>
+
+</body>
+</html>

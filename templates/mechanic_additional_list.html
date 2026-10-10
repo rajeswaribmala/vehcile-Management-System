@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Additional Repair Management</title>
+    <style>
+      
+.mechanic-page {
+    margin: 0;
+    padding: 40px;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #eef2f7, #d9e4f5);
+}
+
+
+.page-wrapper {
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #1e3a8a;
+}
+
+
+.back-btn {
+    text-decoration: none;
+    background: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.back-btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+}
+
+
+.table-card {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modern-table thead {
+    background: #1e3a8a;
+    color: white;
+}
+
+.modern-table th {
+    padding: 14px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.modern-table td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.modern-table tr:hover {
+    background: #f3f4f6;
+}
+
+
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-warning {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.badge-success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.action-link {
+    background: #2563eb;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.action-link:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body class="mechanic-page">
+
+
+
+<div class="page-wrapper">
+
+    <div class="page-header">
+        <h1>🔧 Additional Repair Management</h1>
+
+        <a href="/mechanic/dashboard" class="back-btn">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <div class="table-card">
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Service</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for r in requests %}
+                <tr>
+                    <td>{{ r.id }}</td>
+                    <td>{{ r.customer }}</td>
+                    <td>{{ r.service }}</td>
+
+                    <td>
+                        {% if r.additional_status == "Requested" %}
+                            <span class="badge badge-warning">Requested</span>
+                        {% elif r.additional_status == "Approved" %}
+                            <span class="badge badge-success">Approved</span>
+                        {% elif r.additional_status == "Rejected" %}
+                            <span class="badge badge-danger">Rejected</span>
+                        {% else %}
+                            <span class="badge badge-secondary">None</span>
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <a href="/mechanic/additional/{{ r.id }}" class="action-link">
+                            Add / View
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

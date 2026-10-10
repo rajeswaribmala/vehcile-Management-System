@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login | AutoCare Service</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;   
+    background:url("/static/images/login2.webp") no-repeat center center/cover;
+    background-attachment:fixed;
+}
+
+
+
+header{
+    background:#0d6efd;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+
+
+.card{
+    width:350px;
+    margin:120px auto;
+    padding:30px;
+
+    /* GLASS EFFECT */
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(10px);
+
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:5px;
+}
+
+
+button{
+    background:#0d6efd;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#084298;
+}
+
+
+
+.links{
+    text-align:center;
+    margin-top:15px;
+}
+
+.links a{
+    text-decoration:none;
+    color:#0d6efd;
+}
+
+
+
+.error-message{
+    background:#ffdddd;
+    padding:10px;
+    margin-bottom:10px;
+    border-radius:5px;
+    color:red;
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+<header>
+
+<h2>AutoCare Vehicle Service Center</h2>
+
+<div>
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/login">Login</a>
+</div>
+
+</header>
+
+
+
+
+<div class="card">
+
+<h2 style="text-align:center;">Login</h2>
+
+{% if error %}
+<div class="error-message">
+{{ error }}
+</div>
+{% endif %}
+
+<form method="post">
+
+<select name="role">
+<option value="admin">Admin</option>
+<option value="user">User</option>
+<option value="mechanic">Mechanic</option>
+</select>
+
+<input name="username" placeholder="Username" required>
+
+<input name="password" type="password" placeholder="Password" required>
+
+<center>
+<button type="submit">Login</button>
+</center>
+
+</form>
+
+<div class="links">
+<a href="/register/user">User Register</a> |
+<a href="/register/mechanic">Mechanic Register</a>
+</div>
+
+</div>
+
+
+{% if request.args.get('approval') == 'pending' %}
+<script>
+alert("🕒 Registration successful! Please wait for admin approval.");
+</script>
+{% endif %}
+
+</body>
+</html>

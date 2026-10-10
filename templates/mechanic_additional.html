@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Additional Repair</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: Arial;
+            background: #f4f6f9;
+        }
+
+        .card {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+        }
+
+        a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <h2>Additional Repair</h2>
+
+    <form method="POST">
+
+        <label>Repair Details</label>
+        <textarea name="repair" required>
+{{ service.additional_repair or '' }}
+        </textarea>
+
+        <label>Cost</label>
+        <input type="number"
+               name="cost"
+               value="{{ service.additional_cost or '' }}"
+               required>
+
+        <button type="submit">Send to Customer</button>
+    </form>
+
+    <a href="/mechanic/additional_list">
+        ← Back to Additional List
+    </a>
+
+</div>
+
+</body>
+</html>

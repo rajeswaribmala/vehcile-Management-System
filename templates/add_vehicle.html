@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Add Vehicle</title>
+<style>
+    body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#cfd8dc;
+    font-family:Arial, sans-serif;
+}
+
+.form-container{
+    background:white;
+    padding:30px;
+    width:320px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+form input{
+    width:100%;
+    padding:8px;
+    margin:8px 0 15px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#2b6cb0;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1a4e80;
+}
+</style>
+</head>
+<body>
+<div class="form-container">
+<center><h2>Add Vehicle</h2></center>
+
+<form method="POST">
+Vehicle Number:
+<input type="text" name="number" required>
+
+Vehicle Model:
+<input type="text" name="model" required>
+
+Vehicle Type:
+<input type="text" name="type" required>
+Year:
+<input type="text" name="year" placeholder="Vehicle Year" required>
+
+<button type="submit">Add Vehicle</button>
+</form>
+
+</div>
+</body>
+</html>

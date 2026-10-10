@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Points</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f9;
+}
+
+
+.container{
+    width:85%;
+    margin:auto;
+    margin-top:40px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom:30px;
+}
+
+.card h2{
+    margin:0;
+    color:#2c3e50;
+}
+
+.points{
+    font-size:20px;
+    color:#27ae60;
+    margin-top:10px;
+    font-weight:bold;
+}
+
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+th{
+    background:#34495e;
+    color:white;
+    padding:14px;
+}
+
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+tr:hover{
+    background:#f2f2f2;
+}
+
+
+
+.title{
+    font-size:22px;
+    margin-bottom:15px;
+    color:#2c3e50;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+      <h2>Welcome {{ mechanic['username'] }}</h2>
+        <div class="points">
+            ⭐ Your Monthly Points : {{ monthly_points }}
+        </div>
+    </div>
+
+    <div class="title">Monthly Points History</div>
+
+<table>
+
+<tr>
+<th>Year</th>
+<th>Month</th>
+<th>Points</th>
+</tr>
+
+{% for p in history %}
+<tr>
+<td>{{ p.year }}</td>
+<td>{{ p.month }}</td>
+<td>{{ p.points }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

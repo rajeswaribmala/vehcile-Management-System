@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mechanic Points</title>
+
+<style>
+body{
+    background-color:rgb(233, 245, 250);
+}
+table{
+width:60%;
+margin:auto;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ccc;
+text-align:center;
+}
+
+th{
+background: darkblue;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2 style="text-align:center">
+Points History - {{ mechanic['username'] }}
+</h2>
+
+<table>
+
+<tr>
+<th>Month</th>
+<th>Year</th>
+<th>Points</th>
+</tr>
+
+{% for row in history %}
+
+<tr>
+<td>{{ row['month'] }}</td>
+<td>{{ row['year'] }}</td>
+<td>⭐ {{ row['points'] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

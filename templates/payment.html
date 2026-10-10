@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Additional Repair</title>
+<style>
+    body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#c7d6db;
+}
+
+.payment-container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.payment-box{
+    background:white;
+    padding:30px 40px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    width:300px;
+    text-align:center;
+}
+
+.payment-box select,
+.payment-box input{
+    width:100%;
+    padding:8px;
+    margin-top:10px;
+    margin-bottom:15px;
+}
+
+.payment-box button{
+    padding:8px 15px;
+    background:#2b6cb0;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="payment-container">
+
+<div class="payment-box">
+
+<h2>Choose Payment Method</h2>
+
+<form method="POST" action="/user/payment/{{service.id}}">
+
+<label>Select Method:</label>
+<select name="method" id="method" onchange="showFields()" required>
+<option value="">Select</option>
+<option value="card">Card</option>
+<option value="upi">UPI</option>
+</select>
+
+<div id="cardFields" style="display:none;">
+Card Number:
+<input type="text" name="card_number" maxlength="16">
+
+CVV:
+<input type="password" name="cvv" maxlength="3">
+</div>
+
+<div id="upiFields" style="display:none;">
+UPI ID:
+<input type="text" name="upi_id">
+</div>
+
+<button type="submit">Pay Now</button>
+
+</form>
+
+</div>
+</div>
+
+<script>
+function showFields() {
+let method = document.getElementById("method").value;
+
+document.getElementById("cardFields").style.display =
+method === "card" ? "block" : "none";
+
+document.getElementById("upiFields").style.display =
+method === "upi" ? "block" : "none";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+database.db
+*.sqlite
+*.sqlite3
+bill_*.pdf
+invoice_*.pdf
+bill_*.pdf
+invoice_*.pdf
+intership.jpeg
+python intership.jpeg
+Project.pdf
+EG1.pdf
+database.db
+screenshot

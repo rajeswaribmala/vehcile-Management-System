@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Service</title>
+   <style>
+   
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #dbeafe, #f0fdf4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form-container {
+    width: 420px;
+    background: #ffffff;
+    padding: 35px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1e293b;
+    font-size: 24px;
+}
+
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #334155;
+    display: block;
+    margin-bottom: 8px;
+}
+
+
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s ease;
+    margin-bottom: 18px;
+}
+
+select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+
+input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+    accent-color: #3b82f6;
+}
+
+
+.form-container br {
+    display: none;
+}
+
+.form-container input[type="checkbox"] + span {
+    margin-bottom: 8px;
+}
+
+
+.form-container input[type="checkbox"] {
+    margin-top: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #3b82f6;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        width: 90%;
+        padding: 25px;
+    }
+}
+   </style>
+</head>
+<body>
+
+<div class="form-container">
+<h2>Book Service</h2>
+
+<form method="POST">
+
+  
+    <label>Select Branch (Location):</label>
+    <select name="branch_id" required>
+        <option value="">-- Select Location --</option>
+        {% for b in branches %}
+            <option value="{{ b.id }}">
+                {{ b.branch_name }} - {{ b.location }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+    <label>Mechanic:</label>
+<select name="mechanic_id" id="mechanic">
+    <option value="">Any Mechanic</option>
+</select>
+
+    
+    <label>Select Vehicle:</label>
+    <select name="vehicle_id" required>
+        {% for v in vehicles %}
+            <option value="{{ v.id }}">{{ v.vehicle_number }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    
+    <label>Select Services:</label>
+
+<div class="services-list">
+{% for service in services %}
+    <div class="service-item">
+        <input type="checkbox" name="service_ids" value="{{ service.id }}">
+        {{ service.name }} - ₹{{ service.price }}
+    </div>
+{% endfor %}
+</div>
+
+    <br>
+
+    <button type="submit">Book Service</button>
+
+</form>
+</div>
+<script>
+function loadMechanics() {
+    let branchId = document.getElementById("branch").value;
+
+    if (!branchId) return;
+
+    fetch("/get_mechanics/" + branchId)
+    .then(res => res.json())
+    .then(data => {
+        let mechSelect = document.getElementById("mechanic");
+        mechSelect.innerHTML = '<option value="">Any Mechanic</option>';
+
+        data.forEach(m => {
+            mechSelect.innerHTML += `<option value="${m.id}">${m.username}</option>`;
+        });
+    });
+}
+</script>
+</body>
+</html>

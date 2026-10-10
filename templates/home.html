@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AutoCare Vehicle Service</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    min-height:100vh;
+
+    background:url("{{ url_for('static', filename='images/homepage4.webp') }}") no-repeat center center/cover;
+    background-attachment:fixed;
+}
+header{
+    background:#5f9dfa;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+.hero{
+    text-align:center;
+    padding:120px 20px;
+    color:white;
+    background:rgba(0,0,0,0.45);
+}
+
+.hero h1{
+    font-size:40px;
+}
+.feedback-section{
+    padding:40px;
+}
+.rating-summary{
+    background:rgba(255,255,255,0.95);
+    padding:25px;
+    border-radius:10px;
+    margin-bottom:40px;
+}
+.rating-row{
+    display:flex;
+    align-items:center;
+    margin:10px 0;
+}
+
+.rating-row span{
+    width:70px;
+    font-weight:bold;
+}
+
+.summary-bar{
+    flex:1;
+    height:12px;
+    background:#ddd;
+    border-radius:6px;
+    overflow:hidden;
+    margin:0 10px;
+}
+
+.summary-bar div{
+    height:12px;
+}
+.green{
+    background:#28a745;
+}
+
+.yellow{
+    background:#ffc107;
+}
+
+.red{
+    background:#dc3545;
+}
+.feedback-card{
+    background:rgba(255,255,255,0.95);
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+}
+.feedback-card strong{
+    font-size:16px;
+}
+
+.feedback-card p{
+    margin-top:8px;
+}
+
+
+footer{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h2>AutoCare Vehicle Service Center</h2>
+
+<div>
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/login">Login</a>
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<h1>Professional Vehicle Maintenance & Repair</h1>
+<p>Trusted Vehicle Service Center</p>
+
+</section>
+
+
+<section class="feedback-section">
+
+<h2 style="color:white;">Customer Rating</h2>
+
+
+<div class="rating-summary">
+
+{% for star in [5,4,3,2,1] %}
+
+<div class="rating-row">
+
+<span>{{ star }} ⭐</span>
+
+<div class="summary-bar">
+
+<div class="
+{% if star == 5 %}green
+{% elif star == 4 or star == 3 %}yellow
+{% else %}red
+{% endif %}
+"
+style="width: {{ (rating_count[star] / total_feedback * 100) if total_feedback else 0 }}%">
+</div>
+
+</div>
+
+<span>{{ rating_count[star] }}</span>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+<h2 style="color:white;">Customer Reviews</h2>
+
+
+
+{% for f in feedbacks %}
+
+<div class="feedback-card">
+
+<strong>{{ f.username }}</strong> ⭐ {{ f.rating }}/5
+
+<p>{{ f.message }}</p>
+
+</div>
+
+{% else %}
+
+<p style="color:white;">No feedback yet.</p>
+
+{% endfor %}
+
+</section>
+
+
+<footer>
+📞 +91 98765 43210 | Chennai
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Mechanics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="admin-container">
+
+    <a href="/admin/dashboard" class="back-link">← Back to Dashboard</a>
+    <h2 class="admin-title">Manage Mechanic Shops</h2>
+
+    <table class="admin-table">
+    <tr>
+        <th>ID</th>
+        <th>Branch</th>
+        <th>Username</th>
+        <th>Status</th>
+        <th>Points</th>
+        <th>View Points</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for m in mechanics %}
+    <tr>
+        <td>{{ m["id"] }}</td>
+        <td>{{ m["branch_name"] }}</td>
+        <td>{{ m["username"] }}</td>
+        <td>{{ m["status"] }}</td>
+        <td>⭐ {{ m["points"] }}</td>
+
+       
+        <td>
+            <a href="/admin/mechanic/points/{{ m['id'] }}"
+               class="admin-btn-small btn-blue">
+               View Points
+            </a>
+        </td>
+
+        <td>
+            {% if m["status"] != 'approved' %}
+                <a href="/admin/mechanic/approve/{{ m['id'] }}" 
+                   class="admin-btn-small btn-green">
+                    Approve
+                </a>
+            {% endif %}
+
+            <a href="/admin/mechanic/delete/{{ m['id'] }}" 
+               class="admin-btn-small btn-red"
+               onclick="return confirm('Are you sure you want to delete this mechanic?');">
+                Delete
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+
+</div>
+</body>
+</html>

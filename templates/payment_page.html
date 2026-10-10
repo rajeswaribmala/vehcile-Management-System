@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Bill</title>
+</head>
+<body>
+
+<h2>Service Bill</h2>
+
+<p><strong>Service:</strong> {{ service.name }}</p>
+<p><strong>Amount:</strong> ₹ {{ service.cost }}</p>
+
+<form method="POST" action="/confirm_payment">
+    <input type="hidden" name="service_id" value="{{ service.id }}">
+    <button type="submit">Confirm Payment</button>
+</form>
+
+<br>
+<a href="/dashboard">Back</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Categories</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="admin-container">
+
+    <a href="/admin/dashboard" class="back-link">← Back to Dashboard</a>
+    <h2 class="admin-title">Service Categories</h2>
+
+    <div class="table-header-bar">
+        <form method="post" action="/admin/category/add" class="add-form-inline">
+            <input type="text" name="name" placeholder="New Service Name" required>
+            <button class="btn-primary">Add</button>
+        </form>
+    </div>
+
+    <table class="admin-table">
+        <tr>
+            <th>ID</th>
+            <th>Service Name</th>
+            <th>Action</th>
+        </tr>
+
+        {% for c in categories %}
+        <tr>
+            <td>{{ c[0] }}</td>
+            <td>{{ c[1] }}</td>
+            <td>
+                <a href="/admin/category/delete/{{ c[0] }}" class="btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+</body>
+</html>

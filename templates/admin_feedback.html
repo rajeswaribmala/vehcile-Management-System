@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback & Ratings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="admin-container">
+    <a href="/admin/dashboard">← Back</a>
+    <h2>Customer Feedback & Ratings</h2>
+
+    <table class="admin-table">
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Mechanic</th>
+            <th>Rating</th>
+            <th>Message</th>
+            <th>Date</th>
+        </tr>
+
+        {% for f in feedbacks %}
+<tr>
+    <td>{{ f["id"] }}</td>
+    <td>{{ f["customer"] }}</td>
+    <td>{{ f["mechanic"] }}</td>
+    <td>{{ f["rating"] }} ⭐</td>
+    <td>{{ f["message"] }}</td>
+    <td>{{ f["created_at"] }}</td>
+</tr>
+{% endfor %}
+
+    </table>
+</div>
+</body>
+</html>

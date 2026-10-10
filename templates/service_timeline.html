@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Timeline</title>
+    <style>
+       
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.timeline-container {
+    background: white;
+    width: 650px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.timeline-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.timeline-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #475569;
+}
+
+.timeline-container ul {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.timeline-container ul li {
+    font-weight: 500;
+    color: #0f172a;
+}
+
+
+.timeline {
+    position: relative;
+    margin-left: 20px;
+    padding-left: 30px;
+}
+
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: #e2e8f0;
+}
+
+
+.step {
+    position: relative;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    color: #475569;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+
+.step::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: 18px;
+    width: 18px;
+    height: 18px;
+    background: #cbd5e1;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 0 0 3px #e2e8f0;
+}
+
+.step.active {
+    background: #dcfce7;
+    color: #065f46;
+    font-weight: 600;
+}
+
+.step.active::before {
+    background: #16a34a;
+    box-shadow: 0 0 0 3px #bbf7d0;
+}
+
+.step:hover {
+    transform: translateX(5px);
+}
+
+
+.timeline-container p {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #1e293b;
+}
+
+
+.timeline-container a {
+    display: inline-block;
+    margin-top: 25px;
+    text-decoration: none;
+    background: #2563eb;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.timeline-container a:hover {
+    background: #1d4ed8;
+}
+    </style>
+</head>
+<body>
+
+<div class="timeline-container">
+
+    <h2>Service Timeline</h2>
+
+    <h3>Booked Services:</h3>
+    <ul>
+        {% for s in service_list %}
+            <li>{{ s["name"] }}</li>
+        {% endfor %}
+    </ul>
+
+    {% set status = service.status|lower %}
+    {% set payment = service.payment_status|lower %}
+
+    <div class="timeline">
+
+        <div class="step active">Service Requested</div>
+
+        <div class="step {% if status in ['assigned','in progress','completed'] %}active{% endif %}">
+            Assigned to Mechanic
+        </div>
+
+        <div class="step {% if status in ['in progress','completed'] %}active{% endif %}">
+            Work In Progress
+        </div>
+
+        <div class="step {% if status == 'completed' %}active{% endif %}">
+            Service Completed
+        </div>
+
+        <div class="step {% if payment == 'paid' %}active{% endif %}">
+            Payment Completed
+        </div>
+
+    </div>
+
+    <p><strong>Current Status:</strong> {{ service.status }}</p>
+    <p><strong>Payment Status:</strong> {{ service.payment_status }}</p>
+
+    <br>
+    <a href="/dashboard">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>
